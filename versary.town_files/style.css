@@ -1,0 +1,278 @@
+html {
+    font-family: 'Chivo Mono', monospace;
+    font-weight: 300;
+    background-color: #ffd1dc;
+
+    /* https://chriscoyier.net/2023/11/27/the-hanging-punctuation-property-in-css/ */
+    hanging-punctuation: first allow-end last;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    font-size: 200%;
+    color: hsl(304, 100%, 50%)
+}
+p a {
+  font-size: 100%;
+}
+
+p {
+    font-size: 125%;
+}
+
+strong {
+    font-weight: bold;
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: 'Inconsolata', monospace;
+}
+
+/* https://gist.github.com/stereokai/7666bfe93929b14c2dced148c79e0e97 */
+.sin {
+  --sin-term1: var(--angle);
+  --sin-term2: calc((var(--angle) * var(--angle) * var(--angle)) / 6);
+  --sin-term3: calc((var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle)) / 120);
+  --sin-term4: calc((var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle)) / 5040);
+  --sin-term5: calc((var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle)) / 362880);
+  --sin: calc(var(--sin-term1) - var(--sin-term2) + var(--sin-term3) - var(--sin-term4) + var(--sin-term5));
+}
+
+.cos {
+  --cos-term1: 1;
+  --cos-term2: calc((var(--angle) * var(--angle)) / 2);
+  --cos-term3: calc((var(--angle) * var(--angle) * var(--angle) * var(--angle)) / 24);
+  --cos-term4: calc((var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle)) / 720);
+  --cos-term5: calc((var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle)) / 40320);
+  --cos: calc(var(--cos-term1) - var(--cos-term2) + var(--cos-term3) - var(--cos-term4) + var(--cos-term5));
+}
+
+.tan {
+  --tan-term1: var(--angle);
+  --tan-term2: calc((1/3) * var(--angle) * var(--angle) * var(--angle));
+  --tan-term3: calc((2 / 15) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle));
+  --tan-term4: calc((17/315) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle) * var(--angle));
+  --tan: calc(var(--tan-term1) + var(--tan-term2) + var(--tan-term3) + var(--tan-term4));
+}
+
+.broider-1 {
+    border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAABl0lEQVR4nO2WQQrDQAzE+v9Pt/ftYRk8tidBgtyysaxAm8+nzvdypRHvGy94EO8bL3gQ7xsveLDuexPYDlidP74fQQlaOk/Q4vz2/boDqQuoC077+w8UhQhqFiKoWYigl/vVAN24/Qhq9iOo2Y+gZr/r/eqAaiD1+dVr2o+gZj+Cmv0IavaTBdzBqwFU2v0JWvMh6GUeQUXi/KcDTDO+H0GfPnAYgppp38/9I57G+H4EJagEQc2075f+YV4l/sOdoGkDhyGomfX9+FMiqARBzRDUDEHNENQMQc0Q1AxBzRDUDEHNENRMXNB2gWbG9yNo7f79gcMQ1Exc0KcFPIn7UyJo+sBhCGpmfb+nB7wxvh9Bnz5wGIKaiftwnw6+7f93/7ZQlW1/gl7uJ6g4bzxod7DbPPXq9lP914UJahYmqFn4dUGrQtUA3bj95H0Iqj3PfoCg5gMEdR8QuT1fDTD9Agk67F8/YBYiqFnodUFvD3Av0B1And/+gghK0NJ8ghbZ/k2WhdKI940XPIj3jRc8iPeNFzxo9f0B37a4qk8B6RsAAAAASUVORK5CYII=") 28 / 28px / 0 round;
+    border-width: 28px;
+    border-style: solid;
+}
+
+.broider-2 {
+    border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAABWUlEQVR4nO3WQZKDMAwF0dz/0pm9U4NQqfEPod8WE0u9SPF63dx7kZ7n9gwKMyjs8UHXAF3d30vsuJVBYQaFGTSsGzQx460YFGZQmEGbpsEMujAozKAwg8KmQQy6MCjMoDCDwtYgU+l94gwKMyjMoJKkf/knf6zdx6DHDAozKKzs8/lpzArsfGg6f7kfk+38QGnT+cv9mGznB0qbzl/ux2Q7P1DadP7t+90t6O732wwKMyjMoMULFXrgq3Xn7+5fXmhQgx4yKCwelB44bft8Bv2yCw0KX2jQ5oXr88rlAzd15x/vWx0YXxDGZGvsWx0YXxDGZGvsWx0YXxDGZGvs++1B0tp9DHrMoDCDwuwjST/s89N4Jr1PnEFhBoUZFDYNYtCFQWEGhRkUVgWZPn8cg8IMCjMozGAwg8IMCjPo0BqoG7QrseNWBoUZFGbQiz0+AM2gMIPCfi3oH0QD7g8gkYYFAAAAAElFTkSuQmCC") 28 / 28px / 0 round;
+    border-width: 28px;
+    border-style: solid;
+}
+
+.dog-pic {
+    width: 20rem;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer-stuff {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.badges img {
+  height: 31px;
+}
+.badges2 img {
+  height: 25px;
+}
+.badges a, .badges2 a {
+  text-decoration: none;
+  color: none;
+}
+
+#headerinfo {
+    border-style: double;
+    border-color: black;
+    border-width: 5px;
+    margin-right: 55%;
+    margin-top: 99.99999px;
+
+
+    padding: 1rem;
+}
+
+.email {
+    float: right;
+}
+
+@media screen and (min-width: 900px) {
+    .contact {
+        display: flex;
+        flex-direction: column;
+
+        margin-left: 69%;
+        margin-right: 69.420px;
+        margin-top: 42.069px;
+    }
+}
+.contact .contact-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#license {
+    font-size: 35%;
+}
+
+
+#scroll-container {
+    border: 5px double black;
+    overflow: hidden;
+    font-size: 200%;
+}
+
+#scroll-text {
+    text-align: right;
+    white-space: nowrap;
+    transform: translateX(-100%);
+    animation: my-animation 15s linear infinite;
+}
+
+@keyframes my-animation {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.index-content {
+    display: flex;
+    padding: 3rem;
+    justify-content: space-evenly;
+    margin-top: 3rem
+}
+
+@media screen and (max-width: 900px) {
+    .index-content {
+        flex-direction:column-reverse;
+    }
+
+    #headerinfo {
+        margin: auto;
+    }
+
+    .girls {
+        display: none;
+    }
+    .email {
+        float: none;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .footer-stuff {
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 1700px) {
+    .contact .contact-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 1300px) {
+    .contact .contact-links {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .frogs {
+        display: none;
+    }
+}
+
+
+
+.blog-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+.blog-post .container {
+    text-align: justify;
+    width: 50%;
+}
+.blog-post section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.blog-post section > * {
+    width: 100%;
+}
+.blog-post img {
+    max-width: 100%;
+    max-height: 40rem;
+}
+.blog-post figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.blog-post figcaption {
+    max-width: 50%;
+}
+.blog-post h2 {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.blog-post h2 a,
+.blog-post h3 a,
+.blog-post h4 a,
+.blog-post h5 a {
+    color: black;
+}
+.blog-post h2:hover:after,
+.blog-post h3:hover:after,
+.blog-post h4:hover:after,
+.blog-post h5:hover:after
+{
+    content: " 🔗";
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.blog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+@media screen and (max-width: 900px) {
+    .blog-post .container {
+        width: 85%;
+    }
+
+    .blog-post img {
+        max-width: 90%;
+    }
+
+    .blog-post figcaption {
+        max-width: 100%;
+    }
+}
